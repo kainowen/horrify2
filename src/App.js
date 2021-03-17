@@ -1,25 +1,56 @@
-import logo from './logo.svg';
+import React, { Component } from 'react';
 import './App.css';
+import firebase from './firebase';
+import { BrowserRouter, Route } from 'react-router-dom';
+import Contribute from './components/Contribute/Contribute';
+import Footer from './components/Footer/Footer';
+import Modal from './components/UI/Modal/Modal';
+import Admin from './components/Admin/Admin';
+import Main from './components/Main/Main';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+
+    state = ({
+            search: {
+                decade: '',
+                nature: '',
+                theme: []
+            },
+            movieList: [],
+            oldMovieList: [],
+            searchError: false,
+            heightToggle: false,
+            pageNo: 1,
+            modalShow: false,
+            orderDesc: true,
+            loggedIn: false
+    });
+
+
+
+    componentDidMount() {
+      firebase.auth().onAuthStateChanged((user) => {
+        if (user) {
+          this.setState({loggedIn: true});
+        }
+      })
+    }
+
+    render() {
+        return (
+        <BrowserRouter>
+            <Route path="/" exact component={Main} />
+            <Route path="/admin" exact component={Admin} />
+            <div className='Container Centered'>
+                <hr />
+                <p>Know of any movies we don't have listed?</p>
+                {this.state.modalShow ? <Modal show={this.state.modalShow} clicked={this.showModalHandler} /> : null}
+                <Contribute howtoClicked={this.showModalHandler} loggedIn={this.state.loggedIn}/>
+            </div>
+            <Footer />
+        </BrowserRouter>
+    );
+  }
 }
 
 export default App;

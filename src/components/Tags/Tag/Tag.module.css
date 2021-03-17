@@ -1,0 +1,30 @@
+.Tag{
+    background-color: gray;
+    border: none;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-size: 0.8rem;
+    font-weight: bold;
+    height: 40px;
+    margin: 5px;
+    min-width: 75px;
+}
+
+.Tag:hover, .Tag:focus{
+    background-color: lightgrey;
+    color: black;
+    outline: white;
+}
+
+.TagActive{
+    background-color: lightgrey;
+    border: solid black 2px;
+    color: black;
+}
+
+.TagDisable{
+    background-color: #0E0E0E;
+    color: #454545;
+}

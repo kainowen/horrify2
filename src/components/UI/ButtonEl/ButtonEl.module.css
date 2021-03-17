@@ -1,0 +1,27 @@
+.Button{
+  background-color: #282c34;
+  border: none;
+  border-radius: 10px;
+  box-sizing: border-box;
+  color: white;
+  cursor: pointer;
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: .9rem;
+  font-weight: bold;
+  height: 40px;
+  margin: 5px;
+  min-width: 75px;
+  padding: 10px;
+  text-align: center;
+  z-index: 100;
+}
+.Button:hover{
+  background-color: lightgrey;
+  border: solid 2px black;
+  color: black;
+}
+.Button:focus{
+  background-color: lightgrey;
+  color: black;
+  outline: none;
+}

@@ -1,38 +1,73 @@
-.App {
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed:ital,wght@0,300;0,700;1,300&display=swap');
+
+body{
+  font-family: 'Roboto Condensed', sans-serif;
+  min-height: 100vh;
+}
+
+h1{
+  font-style: italic;
+  margin: 0;
+}
+
+h2, h3, h4{
+  margin: 0;
+}
+
+.Container{
+  clear: both;
+  margin: auto;
+  max-width: 1600px;
+  position: relative;
+  width: 80%;
+}
+
+.Row{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.Centered{
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+
+@media only screen and (max-width: 1345px){
+    .Container{
+        width: 85%;
+    }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+@media only screen and (max-width: 1080px){
+  .Container{
+    width: 87%;
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+@media only screen and (max-width: 991px){
+  .Container{
+    width: 90%;
   }
-  to {
-    transform: rotate(360deg);
+}
+
+@media only screen and (max-width: 800px){
+  .Container{
+    width: 92%;
+  }
+}
+
+@media only screen and (max-width: 600px){
+  .Container{
+    width: 95%;
+  }
+}
+
+@media only screen and (max-width: 360px){
+  h2{
+    font-size: 1.4rem;
+  }
+  p{
+    font-size: 0.9rem
   }
 }

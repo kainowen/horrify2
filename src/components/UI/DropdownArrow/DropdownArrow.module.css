@@ -1,0 +1,11 @@
+.DropdownArrow{
+  height: 16px;
+  vertical-align: text-top;
+  margin-top: 3px;
+  margin-left: 5px;
+  transition: transform .3s ease-out;
+}
+
+.seeMore{
+  transform: rotate(-180deg);
+}

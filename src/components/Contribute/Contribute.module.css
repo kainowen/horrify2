@@ -1,0 +1,50 @@
+.FormShell{
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-evenly;
+}
+
+.InputShell{
+    display: flex;
+    flex-flow: column;
+    margin: 5px auto;
+    text-align: left;
+    width: 100%;
+    max-width: 800px;
+}
+
+.InputStyle{
+    height: 30px;
+    border: solid 2px black;
+    border-radius: 15px;
+    padding-left: 20px;
+    outline: none;
+    width: auto;
+}
+
+.Submit{
+    background-color: black;
+    color: white;
+    font-weight: bold;
+    height: 30px;
+    width: 100%;
+}
+
+.Submit:hover{
+    background-color: darkgray;
+}
+
+.Submit:active{
+    background-color: dimgray;
+}
+
+@media only screen and (max-width: 600px){
+    .FormShell{
+        flex-flow: column;
+    }
+
+    .InputShell{
+        width: 100%;
+    }
+
+}

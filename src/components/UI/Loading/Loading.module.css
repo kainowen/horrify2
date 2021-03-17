@@ -1,0 +1,27 @@
+.Center{
+  text-align: center;
+}
+
+.LoadBar{
+  background-color: black;
+  border-radius: 5px;
+  height: 10px;
+  margin: auto;
+  overflow: hidden;
+  width: 60%;
+}
+
+.Scroller{
+  animation: ScrollerSlide 6s ease-in-out infinite;
+  background-color: white;
+  height: 100%;
+  position: relative;
+  transform: skewX(-20deg);
+  width: 30px;
+}
+
+@keyframes ScrollerSlide {
+  0%   {left: 0;}
+  50%  {left: calc(100% - 28px)}
+  100% {left: 0}
+}

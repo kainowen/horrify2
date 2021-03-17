@@ -1,0 +1,35 @@
+.Modal {
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 15px;
+  box-sizing: border-box;
+  color: black;
+  left: 5%;
+  padding: 16px;
+  position: fixed;
+  text-align: left;
+  top: 5%;
+  transition: all 0.3s ease-out;
+  width: 90%;
+  z-index: 500;
+}
+
+.Modal a{
+  color: black;
+  text-decoration: underline;
+}
+
+@media (min-width: 600px) {
+    .Modal {
+      left: calc(50% - 250px);
+      width: 500px;
+    }
+}
+@media only screen and (max-width: 360px){
+    .Modal {
+      font-size: 0.9rem;
+      margin: 5px 0;
+      top: 0;
+      width: 90%;
+    }
+}

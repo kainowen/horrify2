@@ -1,0 +1,9 @@
+{
+  "rules": {
+    "movies": {
+      ".indexOn": ["orderRating", "nature"]
+    },
+    ".read": true,
+    ".write": true
+  }
+}
