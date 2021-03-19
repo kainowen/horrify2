@@ -16,6 +16,7 @@ const ResultsPage = (props) => {
           admin={props.admin}
           verify={props.verify}
           entry={movie}
+          rating={movie.orderRating}
           />
   ));
 

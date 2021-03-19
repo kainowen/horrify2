@@ -26,20 +26,31 @@ class Main extends Component {
 
 
     componentDidMount() {
+      console.log("Mount");
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           this.setState({loggedIn: true});
         }
       })
-        const rootRef = firebase.database().ref('movies').orderByChild('orderRating');
+      let rootRef;
+      if (this.state.search.decade !== '' && this.state.search.nature === '') {
+          rootRef = firebase.database().ref(this.state.search.decade);
+      } else  if (this.state.search.decade !== '' && this.state.search.nature !== '') {
+          rootRef = firebase.database().ref(this.state.search.decade).orderByChild('nature').equalTo(this.state.search.nature);
+      } else  if (this.state.search.decade === '' && this.state.search.nature !== '') {
+          rootRef = firebase.database().ref('movies').orderByChild('nature').equalTo(this.state.search.nature);
+      } else {
+         rootRef = firebase.database().ref('movies').orderByChild('orderRating');
+      }
         rootRef.on('value', snapshot => {
             if (snapshot.val() !== undefined && snapshot.val() !== null) {
                 const movies = snapshot.val();
-                const titles = Object.keys(movies);
+                const titles = Object.keys(movies);;
                 let movList = [];
                 titles.forEach(function (title) {
                     const movie = movies[title];
                     const mov = {
+                        title: title,
                         decade: movie.decade,
                         nature: movie.nature,
                         themes: movie.themes,
@@ -106,6 +117,7 @@ class Main extends Component {
 
 
     componentDidUpdate(prevProps, prevState, SS) {
+      console.log("1. Update");
         if(prevState.orderDesc!== this.state.orderDesc){
             let movieListOrder = [...this.state.movieList];
             movieListOrder.reverse();
@@ -118,14 +130,20 @@ class Main extends Component {
              this.setState({
                  searchError: false
              });
-
-             let rootRef = firebase.database().ref('movies').orderByChild('orderRating');
+      console.log("2. Update Search");
+             let rootRef;
              if (this.state.search.decade !== '' && this.state.search.nature === '') {
+               console.log("Decade set");
                  rootRef = firebase.database().ref(this.state.search.decade);
              } else  if (this.state.search.decade !== '' && this.state.search.nature !== '') {
+                console.log("Decade & Nature set");
                  rootRef = firebase.database().ref(this.state.search.decade).orderByChild('nature').equalTo(this.state.search.nature);
              } else  if (this.state.search.decade === '' && this.state.search.nature !== '') {
+                console.log("Nature Set");
                  rootRef = firebase.database().ref('movies').orderByChild('nature').equalTo(this.state.search.nature);
+             } else {
+               console.log("Nothing Set");
+                rootRef = firebase.database().ref('movies').orderByChild('orderRating');
              }
 
              rootRef.on('value', snapshot => {
@@ -136,6 +154,7 @@ class Main extends Component {
                      titles.forEach(function (title) {
                          const movie = movies[title];
                          const mov = {
+                            title: title,
                              nature: movie.nature,
                              themes: movie.themes,
                              orderRating: movie.orderRating,
@@ -147,20 +166,28 @@ class Main extends Component {
                      movList.sort(function (a, b) {
                          return a.orderRating - b.orderRating
                      });
+
                      if(this.state.orderDesc){
                          movList.reverse();
                      }
+
                      this.setState({
-                         movieList: movList,
-                         oldMovieList: movList
+                       movieList: movList,
+                       oldMovieList: movList
                      });
+
+                     if (this.state.movieList !== movList){
+                       console.log("no Match");
+                     }
+
                  } else {
                      this.setState({
                          searchError: true
                      })
                  }
              })
-             if (this.state.search.theme.length > 0) {
+
+             /*if (this.state.search.theme.length > 0) {
                const filterList = [...this.state.oldMovieList];
                const targetLength = this.state.search.theme.length;
                const filteredList = filterList.filter((movie) => {
@@ -186,10 +213,11 @@ class Main extends Component {
                  });
              }
          } else {
+                     console.log("Bingo 1");
              this.setState({
                  movieList: this.state.oldMovieList
              });
-         }
+         }*/
          }
 
         if(prevState.search.theme !== this.state.search.theme) {
@@ -228,6 +256,7 @@ class Main extends Component {
 
 
     render() {
+      console.log(this.state);
         let pageContent = [...this.state.movieList];
         pageContent = pageContent.slice(0 + (25 * (this.state.pageNo -1)) , 25 + (25 * (this.state.pageNo -1)));
         let lastPage = false;
