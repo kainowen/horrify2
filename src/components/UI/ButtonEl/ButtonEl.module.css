@@ -21,7 +21,5 @@
   color: black;
 }
 .Button:focus{
-  background-color: lightgrey;
-  color: black;
   outline: none;
 }

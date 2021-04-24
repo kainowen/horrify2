@@ -13,7 +13,7 @@ const Result = (props) => {
     } else {
       container = ['Container', classes.Transition, classes.SeeLess];
       text = 'show more';
-    }
+    };
 
     container = container.join(' ');
     return (

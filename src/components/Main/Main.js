@@ -26,13 +26,12 @@ class Main extends Component {
 
 
     componentDidMount() {
-      console.log("Mount");
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
           this.setState({loggedIn: true});
         }
       })
-      let rootRef;
+      let rootRef = firebase.database().ref('movies').orderByChild('orderRating');
       if (this.state.search.decade !== '' && this.state.search.nature === '') {
           rootRef = firebase.database().ref(this.state.search.decade);
       } else  if (this.state.search.decade !== '' && this.state.search.nature !== '') {
@@ -117,7 +116,7 @@ class Main extends Component {
 
 
     componentDidUpdate(prevProps, prevState, SS) {
-      console.log("1. Update");
+
         if(prevState.orderDesc!== this.state.orderDesc){
             let movieListOrder = [...this.state.movieList];
             movieListOrder.reverse();
@@ -130,19 +129,15 @@ class Main extends Component {
              this.setState({
                  searchError: false
              });
-      console.log("2. Update Search");
-             let rootRef;
+
+             let rootRef = firebase.database().ref('movies').orderByChild('orderRating');
              if (this.state.search.decade !== '' && this.state.search.nature === '') {
-               console.log("Decade set");
                  rootRef = firebase.database().ref(this.state.search.decade);
              } else  if (this.state.search.decade !== '' && this.state.search.nature !== '') {
-                console.log("Decade & Nature set");
                  rootRef = firebase.database().ref(this.state.search.decade).orderByChild('nature').equalTo(this.state.search.nature);
              } else  if (this.state.search.decade === '' && this.state.search.nature !== '') {
-                console.log("Nature Set");
                  rootRef = firebase.database().ref('movies').orderByChild('nature').equalTo(this.state.search.nature);
              } else {
-               console.log("Nothing Set");
                 rootRef = firebase.database().ref('movies').orderByChild('orderRating');
              }
 
@@ -151,15 +146,21 @@ class Main extends Component {
                      const movies = snapshot.val();
                      const titles = Object.keys(movies);
                      let movList = [];
+                     let decade = null;
+                     if (this.state.search.decade !== ''){
+                       decade = this.state.search.decade;
+                     }
                      titles.forEach(function (title) {
                          const movie = movies[title];
                          const mov = {
                             title: title,
                              nature: movie.nature,
                              themes: movie.themes,
+                             decade: decade,
                              orderRating: movie.orderRating,
                              tmdbID: movie.tmdbID
                          };
+
                          movList.push(mov);
                      });
 
@@ -176,56 +177,24 @@ class Main extends Component {
                        oldMovieList: movList
                      });
 
-                     if (this.state.movieList !== movList){
-                       console.log("no Match");
-                     }
-
                  } else {
                      this.setState({
                          searchError: true
                      })
                  }
              })
-
-             /*if (this.state.search.theme.length > 0) {
-               const filterList = [...this.state.oldMovieList];
-               const targetLength = this.state.search.theme.length;
-               const filteredList = filterList.filter((movie) => {
-                 const themes = Object.keys(movie.themes);
-                  let matches = 0;
-                  let val = false;
-                  this.state.search.theme.forEach(theme => {
-                    if(themes.includes(theme)){
-                      matches = matches + 1;
-                    }
-                  })
-                  if(matches === targetLength){
-                     val = true;
-                  }
-                  return val;
-               })
-               this.setState({
-                   movieList: filteredList
-               });
-              if(filteredList.length <= 0) {
-                 this.setState({
-                     searchError: true
-                 });
-             }
-         } else {
-                     console.log("Bingo 1");
-             this.setState({
-                 movieList: this.state.oldMovieList
-             });
-         }*/
          }
 
         if(prevState.search.theme !== this.state.search.theme) {
            if (this.state.search.theme.length > 0) {
              const filterList = [...this.state.oldMovieList];
+             console.log(filterList);
              const targetLength = this.state.search.theme.length;
              const filteredList = filterList.filter((movie) => {
-               const themes = Object.keys(movie.themes);
+               if (movie.themes !== undefined){
+
+                let themes = Object.keys(movie.themes);
+
                 let matches = 0;
                 let val = false;
                 this.state.search.theme.forEach(theme => {
@@ -237,7 +206,7 @@ class Main extends Component {
                    val = true;
                 }
                 return val;
-             })
+             }})
              this.setState({
                  movieList: filteredList
              });
@@ -256,7 +225,6 @@ class Main extends Component {
 
 
     render() {
-      console.log(this.state);
         let pageContent = [...this.state.movieList];
         pageContent = pageContent.slice(0 + (25 * (this.state.pageNo -1)) , 25 + (25 * (this.state.pageNo -1)));
         let lastPage = false;

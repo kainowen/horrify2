@@ -23,7 +23,7 @@ const Tagbar = (props) => {
         <div className={bar}>
             <div className={'Container'}>
             <div className={classes.Box} style={{ marginRight: '-5px' }}>
-                <a href='index.html'><h1> HORR-IFY </h1></a>
+                <a href='/'><h1> HORR-IFY </h1></a>
                   <Tag
                     name={inner}
                     current={''}

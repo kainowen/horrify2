@@ -11,6 +11,7 @@ const ResultsPage = (props) => {
           key={movie.tmdbID}
           title={movie.title}
           nature={movie.nature}
+          decade={movie.decade}
           themes={movie.themes}
           tmdbID={movie.tmdbID}
           admin={props.admin}
@@ -34,12 +35,12 @@ const ResultsPage = (props) => {
 
   return (
         <div className='Container'>
-          <div className='Row' style={{ flexDirection: flexDirection, height: '50px' }}>
+          <div className='Container Row' style={{ flexDirection: flexDirection, height: '50px' }}>
               {next}
               {prev}
           </div>
           {movieResultsList}
-          <div className='Row' style={{ flexDirection: flexDirection, height: '50px' }}>
+          <div className='Container Row' style={{ flexDirection: flexDirection, height: '50px' }}>
               {next}
               {prev}
           </div>
