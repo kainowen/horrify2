@@ -95,7 +95,9 @@ class Main extends Component {
           });
       }
         this.setState({
-            search: updatedState });
+            search: updatedState,
+            pageNo: 1,
+          });
     };
 
     pageHandler = (change) => {
@@ -188,7 +190,6 @@ class Main extends Component {
         if(prevState.search.theme !== this.state.search.theme) {
            if (this.state.search.theme.length > 0) {
              const filterList = [...this.state.oldMovieList];
-             console.log(filterList);
              const targetLength = this.state.search.theme.length;
              const filteredList = filterList.filter((movie) => {
                if (movie.themes !== undefined){
@@ -206,6 +207,9 @@ class Main extends Component {
                    val = true;
                 }
                 return val;
+             } else {
+               console.log(movie.title);
+               return null;
              }})
              this.setState({
                  movieList: filteredList

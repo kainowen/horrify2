@@ -15,6 +15,11 @@ const Result = (props) => {
       text = 'show more';
     };
 
+    let whereToWatch = "Not available to stream";
+    if (props.whereToWatch !== "" && props.whereToWatch !== null && props.whereToWatch !== undefined){
+      whereToWatch = props.whereToWatch;
+    }
+
     container = container.join(' ');
     return (
       <div>
@@ -41,6 +46,7 @@ const Result = (props) => {
               <p> Themes: {props.themes}</p>
           </div>
           <p>{props.plot}</p>
+          <p>watch on: {whereToWatch}</p>
       </div>
         <Dropdown clicked={props.clicked} seeMore={props.seeMore}> {text} </Dropdown>
     </div>);

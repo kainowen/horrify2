@@ -213,6 +213,13 @@ class Contribute extends Component {
         }
       }
     }
+    /*if (prevState.state.alerts !== this.state.alerts) {
+      if (this.state.alerts !== undefined && this.state.alerts.includes( 'Thanks for adding' )) {
+        this.setState({
+          entry: {}
+        });
+      }
+    }*/
   }
 
   render() {

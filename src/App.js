@@ -6,6 +6,7 @@ import Contribute from './components/Contribute/Contribute';
 import Footer from './components/Footer/Footer';
 import Modal from './components/UI/Modal/Modal';
 import Admin from './components/Admin/Admin';
+import MyList from './components/MyList/MyList';
 import Main from './components/Main/Main';
 
 class App extends Component {
@@ -41,6 +42,7 @@ class App extends Component {
         <BrowserRouter>
             <Route path="/" exact component={Main} />
             <Route path="/admin" exact component={Admin} />
+            <Route path="/my-list" exact component={MyList} />
             <div className='Container Centered'>
                 <hr />
                 <p>Know of any movies we don't have listed?</p>

@@ -3,7 +3,7 @@ import firebase from './../../firebase';
 import ResultsPage from '../ResultBrief/ResultsPage/ResultsPage';
 import Loading from '../UI/Loading/Loading';
 
-class Admin extends Component {
+class MyList extends Component {
 
   state = {
     movieList: [],
@@ -12,7 +12,8 @@ class Admin extends Component {
     pageNo:1,
     verified: false,
     entry:{},
-    decade: null
+    decade: null,
+    loggedIn: false
       };
 
       componentDidMount() {
@@ -53,47 +54,10 @@ class Admin extends Component {
         })
       }
 
-      verifyHandler = (e, entry) => {
-        this.setState({verify: true});
-        const entryTitle = entry.title;
-        delete entry.title;
-        const alteredEntry = {[entryTitle]: {...entry}};
-        this.setState({entry: alteredEntry,
-                      decade: entry.decade});
-      }
-
       componentDidUpdate(prevProps, prevState, SS) {
-        if (this.state.verify !== prevState.verify) {
-          if (this.state.verify === true) {
-            let movTitle = Object.keys(this.state.entry)[0];
-            if (this.state.entry[movTitle].nature !== '' && Object.keys(this.state.entry[movTitle]
-                .themes).length > 0) {
-              const rootRef = firebase.database().ref(this.state.decade).child(movTitle);
-              const movieRef = firebase.database().ref('movies').child(movTitle);
-              const deleteRef = firebase.database().ref('contribute').child(movTitle);
-              rootRef.on('value', snapshot => {
-                if (snapshot.val() === null) {
-                  const entry = {...this.state.entry};
 
-                  rootRef.set(entry[movTitle]);
-                  movieRef.set(entry[movTitle]);
-                  deleteRef.remove()
-                  this.setState({
-                    verify: false,
-                    alerts: 'Thanks for adding ' + movTitle + ' to our database',
-                  });
-                } else {
-                  this.setState({
-                    verify: false,
-                    alerts: 'Thanks, but we already have ' + movTitle + ' in our database',
-                  });
-                }
-              });
-            }
-
-          }
-        }
       }
+
   render() {
 
     let pageContent = [...this.state.movieList];
@@ -128,4 +92,4 @@ class Admin extends Component {
   }
 }
 
-export default Admin;
+export default MyList;
