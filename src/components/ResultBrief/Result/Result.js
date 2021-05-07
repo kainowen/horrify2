@@ -2,6 +2,7 @@ import React from 'react';
 import Dropdown from './Dropdown';
 import classes from '../Results.module.css';
 import Button from '../../UI/ButtonEl/ButtonEl'
+import { ReactComponent as List } from '../../../assets/list-solid.svg';
 
 const Result = (props) => {
 
@@ -20,6 +21,16 @@ const Result = (props) => {
       whereToWatch = props.whereToWatch;
     }
 
+    let watchList;
+    if (props.loggedIn && !props.onWatchlist){
+      watchList = [classes.List, classes.Transition2, classes.Open];
+    } else if (props.loggedIn && props.onWatchlist) {
+      watchList = [classes.List, classes.Transition2, classes.Open, classes.OnWatchlist];
+    } else {
+      watchList = [classes.List, classes.Transition2, classes.Close];
+    }
+
+    watchList = watchList.join(' ');
     container = container.join(' ');
     return (
       <div>
@@ -31,7 +42,11 @@ const Result = (props) => {
                   src={props.poster}
                   alt={props.title + ' poster '} />
                   {props.admin ? <Button name="verify" clicked={props.verify}/> : null}
-              <h2> {props.title}</h2>
+
+              <div className={classes.TitleBox}>
+                <h2> {props.title}</h2>
+                <List className={watchList} onClick={(tltle, id) => props.addToWatchlist(props.title, props.id)} />
+              </div>
               <div className='Row'>
                   <p style={{ marginBottom: '0' }}> Year: <br className={classes.HideOnLarge} />
                       {props.year}

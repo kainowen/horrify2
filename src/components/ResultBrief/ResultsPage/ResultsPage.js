@@ -4,7 +4,6 @@ import NavButton from '../../UI/ButtonEl/ButtonEl';
 import Loading from '../../UI/Loading/Loading';
 
 const ResultsPage = (props) => {
-
   let movieResultsList = <Loading />;
   movieResultsList = props.list.map((movie) => (
        <ResultsBrief
@@ -18,6 +17,9 @@ const ResultsPage = (props) => {
           verify={props.verify}
           entry={movie}
           rating={movie.orderRating}
+          loggedIn={props.loggedIn}
+          watchlist={props.watchlist}
+          user={props.user}
           />
   ));
 

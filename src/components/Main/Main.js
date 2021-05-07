@@ -26,21 +26,8 @@ class Main extends Component {
 
 
     componentDidMount() {
-      firebase.auth().onAuthStateChanged((user) => {
-        if (user) {
-          this.setState({loggedIn: true});
-        }
-      })
       let rootRef = firebase.database().ref('movies').orderByChild('orderRating');
-      if (this.state.search.decade !== '' && this.state.search.nature === '') {
-          rootRef = firebase.database().ref(this.state.search.decade);
-      } else  if (this.state.search.decade !== '' && this.state.search.nature !== '') {
-          rootRef = firebase.database().ref(this.state.search.decade).orderByChild('nature').equalTo(this.state.search.nature);
-      } else  if (this.state.search.decade === '' && this.state.search.nature !== '') {
-          rootRef = firebase.database().ref('movies').orderByChild('nature').equalTo(this.state.search.nature);
-      } else {
-         rootRef = firebase.database().ref('movies').orderByChild('orderRating');
-      }
+
         rootRef.on('value', snapshot => {
             if (snapshot.val() !== undefined && snapshot.val() !== null) {
                 const movies = snapshot.val();
@@ -208,7 +195,6 @@ class Main extends Component {
                 }
                 return val;
              } else {
-               console.log(movie.title);
                return null;
              }})
              this.setState({
@@ -248,6 +234,9 @@ class Main extends Component {
                                           clickedDown={() => this.pageHandler(-1)}
                                           pageNo={this.state.pageNo}
                                           lastPage={lastPage}
+                                          loggedIn={this.props.loggedIn}
+                                          watchlist={this.props.watchlist}
+                                          user={this.props.user}
                                           />;
         } else{
             movieResultsList = <div className='Container Centered'><p> A movie matching these tags does not exist... It is now your responsibility to make it.</p></div>
@@ -262,6 +251,7 @@ class Main extends Component {
                 tagsSelect={this.TagSelectHandler}
                 orderClick={this.orderHandler}
                 order={this.state.orderDesc}
+                loggedIn={this.props.loggedIn}
               />
               <ResultHeader search={this.state.search} />
               {loading}

@@ -18,12 +18,10 @@ class Contribute extends Component {
         entry: {},
         linkAdded: false,
         alerts: '',
-        userEmail:'',
-        userPass:'',
         signInError:''
       };
 
-  userDetailsHandler = (event) => {
+  /*userDetailsHandler = (event) => {
     let email;
     let pass;
     if (event.target.id === 'userEmail'){
@@ -33,23 +31,22 @@ class Contribute extends Component {
       pass = event.target.value;
       this.setState({userPass: pass});
     }
-  }
+  }*/
 
   userSignUpHandler = (e) => {
     firebase.auth()
-      .createUserWithEmailAndPassword(this.state.userEmail, this.state.userEmail)
+      .createUserWithEmailAndPassword(this.props.userEmail, this.props.userEmail)
         .catch((error) => {
           this.setState({signInError: error.message})
-          console.log(this.state.signInError);
+          console.log(error.message);
         });
   }
 
-  userLogInHandler = (e) => {
+/*  userLogInHandler = (e) => {
     firebase.auth()
       .signInWithEmailAndPassword(this.state.userEmail, this.state.userEmail)
         .catch((error) => {
           this.setState({signInError: error.message});
-          console.log(this.state.signInError);
         });
   }
 
@@ -57,7 +54,7 @@ class Contribute extends Component {
     firebase.auth().signOut().then(res => {
       this.setState({loggedIn: false});
     });
-  }
+  }*/
 
   changeEventHandler = (event) => {
         const updatedState = { ...this.state.movieAdd };
@@ -234,10 +231,10 @@ class Contribute extends Component {
               formChange={(e) => this.changeEventHandler(e)}
               formSubmit={(e) => this.submitEventHandler(e)}
               loggedIn={this.props.loggedIn}
-              userDetails={(event) => this.userDetailsHandler(event)}
+              userDetails={this.props.onChange}
               signUp={this.userSignUpHandler}
-              login={this.userLogInHandler}
-              logout={this.logoutHandler}
+              login={this.props.clickLogin}
+              logout={this.props.clickLogout}
               signInError={this.state.signInError}
               linkAdded={this.state.linkAdded}
             />

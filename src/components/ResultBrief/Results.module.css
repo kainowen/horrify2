@@ -55,6 +55,24 @@ hr{
   text-align: center;
 }
 
+.List {
+  cursor: pointer;
+  height: 1em;
+  margin: auto 1em;
+  top:3px;
+  width: 1em;
+}
+
+.OnWatchlist {
+  color: #1cdb32;
+  font-weight: bold;
+}
+
+.TitleBox{
+  align-items: baseline;
+  display: flex;
+}
+
 @media only screen and (max-width: 991px){
     .Container{
         width: 80%;

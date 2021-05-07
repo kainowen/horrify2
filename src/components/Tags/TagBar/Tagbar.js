@@ -2,6 +2,7 @@ import React from 'react';
 import Tag from '../Tag/Tag';
 import Tags from '../Tags';
 import classes from './Tagbar.module.css';
+import { Link } from 'react-router-dom';
 import { ReactComponent as Hitolo } from '../../../assets/order-hilo.svg';
 import { ReactComponent as Lotothi } from '../../../assets/order-lohi.svg';
 
@@ -23,12 +24,17 @@ const Tagbar = (props) => {
         <div className={bar}>
             <div className={'Container'}>
             <div className={classes.Box} style={{ marginRight: '-5px' }}>
-                <a href='/'><h1> HORR-IFY </h1></a>
+                <Link to='/'><h1> HORR-IFY </h1></Link>
+                  <div>
+                  {props.loggedIn ?
+                    <Link to="/my-list" ><Tag
+                    name="My Watchlist"
+                    current={''}/></Link> : null}
                   <Tag
                     name={inner}
                     current={''}
-                    clicked={props.clicked}
-                  />
+                    clicked={props.clicked}/>
+                </div>
             </div>
               <div style={{ marginBottom: '20px' }}>
                   <hr />
