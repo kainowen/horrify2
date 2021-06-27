@@ -16,7 +16,7 @@ const Tags = (props) => {
             creator: ['cronenberg', 'fulci', 'hitchcock', 'hp lovecraft', 'stephen king', 'wes craven'],
             setting: ['apocalypse', 'christmas', 'dystopian', 'halloween', 'historic', 'holiday', 'road', 'space', 'the woods', 'time play', 'tundra', 'vacation', 'war'],
             threat: ['animal', 'cannibal', 'clown', 'creepy kids', 'cult', 'demon', 'devil', 'dolls', 'haunting',  'kaiju',  'mad scientist', 'monster', 'nazi', 'psycho-biddy', 'poltergeist', 'possession', 'redneck', 'serial killer', 'shark', 'slasher', 'vampire', 'werewolf', 'zombie'],
-            other: ['ballet', 'body horror', 'catholicism', 'conspiracy', 'female lead', 'home invasion',  'hostage', 'identity', 'invasion', 'isolation', 'meta', 'obsession', 'occult', 'pandemic', 'paranoia', 'psychic', 'religion',  'revenge', 'sexual', 'torture porn'],
+            other: ['ballet', 'body horror', 'catholicism', 'conspiracy', 'female lead', 'home invasion',  'hostage', 'hidden gem', 'identity', 'invasion', 'isolation', 'meta', 'obsession', 'occult', 'pandemic', 'paranoia', 'psychic', 'religion',  'revenge', 'sexual', 'torture porn'],
           },
     };
 
