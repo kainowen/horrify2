@@ -20,6 +20,24 @@
   border: solid 2px black;
   color: black;
 }
-.Button:focus{
+.Button:active{
+  background-color: lightgrey;
+  border: solid 2px black;
+  color: black;
   outline: none;
+}
+
+@media only screen and (max-width: 991px){
+  .Button:hover{
+    background-color: #282c34;
+    border: none;
+    color: white;
+  }
+.Button:active{
+    background-color: lightgrey;
+    border: solid 2px black;
+    color: black;
+    outline: none;
+  }
+
 }

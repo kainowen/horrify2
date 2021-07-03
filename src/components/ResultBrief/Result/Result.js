@@ -29,42 +29,56 @@ const Result = (props) => {
     } else {
       watchList = [classes.List, classes.Transition2, classes.Close];
     }
-
     watchList = watchList.join(' ');
     container = container.join(' ');
-    return (
-      <div>
-        <div className={container}>
-          <hr/>
-          <div>
-              <img
-                  className={classes.ResultImg}
-                  src={props.poster}
-                  alt={props.title + ' poster '} />
-                  {props.admin ? <Button name="verify" clicked={props.verify}/> : null}
 
-              <div className={classes.TitleBox}>
-                <h2> {props.title}</h2>
-                <List className={watchList} onClick={(tltle, id) => props.addToWatchlist(props.title, props.id)} />
-              </div>
-              <div className='Row'>
-                  <p style={{ marginBottom: '0' }}> Year: <br className={classes.HideOnLarge} />
-                      {props.year}
-                  </p>
-                  <p style={{ marginBottom: '0' }}> Nature: <br className={classes.HideOnLarge} />
-                      {props.nature}
-                  </p>
-                  <p style={{ marginBottom: '0' }}> Rating: <br className={classes.HideOnLarge} />
-                      {props.iMDBrating}
-                  </p>
-              </div>
-              <p> Themes: {props.themes}</p>
-          </div>
-          <p>{props.plot}</p>
-          <p>watch on: {whereToWatch}</p>
-      </div>
-        <Dropdown clicked={props.clicked} seeMore={props.seeMore}> {text} </Dropdown>
-    </div>);
+ let result = (
+        <div>
+          <div className={container}>
+            <hr/>
+            <div>
+                <img
+                    className={classes.ResultImg}
+                    src={props.poster}
+                    alt={props.title + ' poster '} />
+                    {props.admin ? <Button name="verify" clicked={props.verify}/> : null}
+
+                <div className={classes.TitleBox}>
+                  <h2 className={classes.Title}> {props.title}</h2>
+                  <List className={watchList} onClick={(tltle, id) => props.addToWatchlist(props.title, props.id)} />
+                </div>
+                <div className='Row'>
+                    <p style={{ marginBottom: '0' }}> Year: <br className={classes.HideOnLarge} />
+                        {props.year}
+                    </p>
+                    <p style={{ marginBottom: '0' }}> Nature: <br className={classes.HideOnLarge} />
+                        {props.nature}
+                    </p>
+                    <p style={{ marginBottom: '0' }}> Rating: <br className={classes.HideOnLarge} />
+                        {props.iMDBrating}
+                    </p>
+                </div>
+                <p> Themes: {props.themes}</p>
+            </div>
+            <p>{props.plot}</p>
+            <p>watch on: {whereToWatch}</p>
+        </div>
+          <Dropdown clicked={props.clicked} seeMore={props.seeMore}> {text} </Dropdown>
+      </div>);
+
+
+    if ( props.whereToWatchTag !== "" ){
+      if (props.whereToWatch !== "" && props.whereToWatch !== undefined) {
+        if (!props.whereToWatch.includes(props.whereToWatchTag)) {
+        result = null
+        }
+      } else {
+        result = null
+      }
+    }
+
+
+    return (result);
 
   };
 

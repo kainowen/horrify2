@@ -11,8 +11,9 @@ const Modal = (props) => (
               <div
                   className={classes.Modal}
                   style={{
-                      transform: props.show ? 'opacity(100%)' : 'opacity(0%)',
-                      opacity: props.show ? '1' : '0',
+                      display: props.show ? 'block': 'none',
+                      opacity: props.show ? '100%' : '0%',
+
                     }}>
                   <h4> how to add a movie: </h4>
                   <p> Step 1: Find the movie you want to add on
@@ -27,10 +28,10 @@ const Modal = (props) => (
                   <p> Step 4: Select the 'Nature' of the movie</p>
                   <ul>
                       <li> Natural: If the movie is entirly possible today</li>
-                      <li> Supernatural: If the counldn't happen today (including sci-fi)</li>
+                      <li> Supernatural: If the couldn't happen today (including sci-fi)</li>
                       <li> Ambiguous: If it's unclear whether theres something supernatural happening or if labelling it would be a spoiler</li>
                   </ul>
-                  <p> Add the tags. Try to use tags we already have listed unless unavoidable.</p>
+                  <p> Step 5: Add the tags. Only use tags we already have listed.</p>
                   <p> Make sure each tag is separated with a comma and space e.g 'slasher, mystery, comedy'</p>
                   <Button clicked={props.clicked} name='got it' />
               </div>

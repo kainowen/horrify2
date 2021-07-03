@@ -11,6 +11,7 @@ const ResultsPage = (props) => {
           title={movie.title}
           nature={movie.nature}
           decade={movie.decade}
+          whereToWatchTag={props.whereToWatch}
           themes={movie.themes}
           tmdbID={movie.tmdbID}
           admin={props.admin}

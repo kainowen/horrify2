@@ -13,7 +13,7 @@ const ContributeForm = (props) => {
     form2 =
             <div style={{ width: '100%' }}>
               <h4> {movTitle}</h4>
-                  <p>Decade: {props.movieYear}'s </p>
+                  <p>Decade: {props.movieYear}''s </p>
                   <p>Rating: {props.entry[movTitle].orderRating}</p>
               <label> is this movie a remake?
                   <input

@@ -20,6 +20,16 @@ const Tagbar = (props) => {
 
     bar = bar.join(' ');
 
+    let watchlistButton;
+
+    if (props.watchlistPage){
+      watchlistButton = <Link to="/" ><Tag name="home" current={''}/></Link>;
+    } else {
+      watchlistButton = <Link to="/my-list" ><Tag name="My Watchlist" current={''}/></Link>;
+    }
+
+
+
     return (
         <div className={bar}>
             <div className={'Container'}>
@@ -27,21 +37,20 @@ const Tagbar = (props) => {
                 <Link to='/'><h1> HORR-IFY </h1></Link>
                   <div>
                   {props.loggedIn ?
-                    <Link to="/my-list" ><Tag
-                    name="My Watchlist"
-                    current={''}/></Link> : null}
+                    watchlistButton : null}
                   <Tag
                     name={inner}
                     current={''}
                     clicked={props.clicked}/>
                 </div>
             </div>
-              <div style={{ marginBottom: '20px' }}>
+              <div className={classes.TagBox}>
                   <hr />
                   <p> select the tags you want to search by</p>
                   <Tags current={props.current}
                         search ={props.search}
-                        clicked={props.tagsSelect}/>
+                        clicked={props.tagsSelect}
+                        />
                   <p onClick={props.orderClick}
                     className={classes.Rating}>
                     order by rating :

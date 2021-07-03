@@ -16,12 +16,20 @@ a{
   justify-content: space-between;
 }
 
+.TagBox{
+  margin-bottom: 20px;
+  max-height: 90vh;
+  overflow-y: scroll;
+}
+
 .SeeMore{
+  height: 100vh;
   max-height: 50px;
   overflow-y: hidden;
 }
 
 .SeeLess{
-  max-height: 2000px;
-  overflow-y: hidden;
+  height:100vh;
+  max-height: 100vh;
+  overflow-y: hidden
 }

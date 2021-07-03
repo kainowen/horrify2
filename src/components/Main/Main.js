@@ -13,6 +13,7 @@ class Main extends Component {
             search: {
                 decade: '',
                 nature: '',
+                where: '',
                 theme: []
             },
             movieList: [],
@@ -20,6 +21,7 @@ class Main extends Component {
             searchError: false,
             heightToggle: false,
             pageNo: 1,
+            pageCount: 10,
             orderDesc: true,
     });
 
@@ -68,8 +70,8 @@ class Main extends Component {
     }
 
     TagSelectHandler = (tag, tagKey) => {
-        let updatedState = {...this.state.search};
-       if(tagKey !== 'theme' && tag !== updatedState[tagKey]) {
+      let updatedState = {...this.state.search};
+      if(tagKey !== 'theme' && tag !== updatedState[tagKey]) {
           updatedState[tagKey] = tag;
       } else if (tagKey !== 'theme' && tag === updatedState[tagKey]) {
           updatedState[tagKey] = '';
@@ -86,6 +88,7 @@ class Main extends Component {
             pageNo: 1,
           });
     };
+
 
     pageHandler = (change) => {
         let page = this.state.pageNo;
@@ -163,7 +166,8 @@ class Main extends Component {
 
                      this.setState({
                        movieList: movList,
-                       oldMovieList: movList
+                       oldMovieList: movList,
+                       pageNo: 1
                      });
 
                  } else {
@@ -214,11 +218,14 @@ class Main extends Component {
    }
 
 
+
+
     render() {
+
         let pageContent = [...this.state.movieList];
-        pageContent = pageContent.slice(0 + (25 * (this.state.pageNo -1)) , 25 + (25 * (this.state.pageNo -1)));
+        pageContent = pageContent.slice(0 + (this.state.pageCount * (this.state.pageNo -1)) , this.state.pageCount + (this.state.pageCount * (this.state.pageNo -1)));
         let lastPage = false;
-        if (pageContent.length < 25){
+        if (pageContent.length < this.state.pageCount){
           lastPage = true;
         }
         let loading = <Loading />;
@@ -237,6 +244,7 @@ class Main extends Component {
                                           loggedIn={this.props.loggedIn}
                                           watchlist={this.props.watchlist}
                                           user={this.props.user}
+                                          whereToWatch={this.state.search.where}
                                           />;
         } else{
             movieResultsList = <div className='Container Centered'><p> A movie matching these tags does not exist... It is now your responsibility to make it.</p></div>

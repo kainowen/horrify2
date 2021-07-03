@@ -5,15 +5,15 @@ import Loading from '../UI/Loading/Loading';
 
 class Admin extends Component {
 
-  state = {
-    movieList: [],
-    oldMovieList: [],
-    admin: false,
-    pageNo:1,
-    verified: false,
-    entry:{},
-    decade: null
-      };
+  state = ({
+            movieList: [],
+            oldMovieList: [],
+            admin: false,
+            pageNo:1,
+            verified: false,
+            entry:{},
+            decade: null
+          });
 
       componentDidMount() {
         firebase.auth().onAuthStateChanged((user) => {
@@ -115,7 +115,9 @@ class Admin extends Component {
                                       lastPage={lastPage}
                                       admin={this.state.admin}
                                       verify={this.verifyHandler}
-                                      />;
+                                      watchlist={this.props.watchlist}
+                                      user={this.props.user}
+                                      whereToWatch=""/>;
 
     //jscs:disable maximumLineLength
     return (

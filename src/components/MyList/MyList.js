@@ -12,6 +12,7 @@ class Main extends Component {
     search: {
       decade: '',
       nature: '',
+      where:'',
       theme: []
     },
     myWatchList: [],
@@ -72,7 +73,8 @@ class Main extends Component {
   orderHandler = (change) => {
     let order = this.state.orderDesc;
     this.setState({
-      orderDesc: !order
+      orderDesc: !order,
+      pageNo: 1
     })
   }
 
@@ -113,7 +115,8 @@ class Main extends Component {
 
               this.setState({
                 movieList: movList,
-                oldMovieList: movList
+                oldMovieList: movList,
+                pageNo: 1
               });
              } else {
                console.log("Movie: " + item + " Could not be retrieved from our Database");
@@ -273,7 +276,16 @@ class Main extends Component {
 
     let movieResultsList = null;
     if (!this.state.searchError) {
-      movieResultsList = <ResultsPage list={pageContent} clickedUp={() => this.pageHandler(+ 1)} clickedDown={() => this.pageHandler(-1)} pageNo={this.state.pageNo} lastPage={lastPage} loggedIn={this.props.loggedIn} watchlist={this.props.watchlist} user={this.props.user}/>;
+      movieResultsList = (<ResultsPage
+                                  list={pageContent}
+                                  clickedUp={() => this.pageHandler(+ 1)}
+                                  clickedDown={() => this.pageHandler(-1)}
+                                  pageNo={this.state.pageNo}
+                                  lastPage={lastPage}
+                                  loggedIn={this.props.loggedIn}
+                                  watchlist={this.props.watchlist}
+                                  user={this.props.user}
+                                  whereToWatch={this.state.search.where}/>);
     } else {
       movieResultsList = <div className='Container Centered'>
         <p>
@@ -282,7 +294,16 @@ class Main extends Component {
     }
 
     return (<div>
-      <Tagbar toggle={this.state.heightToggle} clicked={this.heightTiggleHandler} search={this.state.search} tagsSelect={this.TagSelectHandler} orderClick={this.orderHandler} order={this.state.orderDesc}/>
+      <Tagbar
+        toggle={this.state.heightToggle}
+        clicked={this.heightTiggleHandler}
+        search={this.state.search}
+        tagsSelect={this.TagSelectHandler}
+        orderClick={this.orderHandler}
+        order={this.state.orderDesc}
+        loggedIn={this.props.loggedIn}
+        watchlistPage={true} />
+
       <ResultHeader search={this.state.search} watchlist={this.state.myWatchList} />
       {loading}
       {movieResultsList}

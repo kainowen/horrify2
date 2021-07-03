@@ -1,7 +1,10 @@
 .Footer{
   background-color: #282c34;
+  bottom: 0;
   color: white;
+  margin-bottom: 0;
   margin-top: 20px;
+  position: relative;
   text-align: left;
 }
 

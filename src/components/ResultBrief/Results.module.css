@@ -71,6 +71,11 @@ hr{
 .TitleBox{
   align-items: baseline;
   display: flex;
+  justify-content: space-between;
+}
+
+.Title {
+  max-width: auto;
 }
 
 @media only screen and (max-width: 991px){
@@ -85,6 +90,9 @@ hr{
     }
     .HideOnLarge{
         display: block;
+    }
+    .Title {
+      max-width: 6em;
     }
 }
 

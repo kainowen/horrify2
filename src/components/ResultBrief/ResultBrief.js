@@ -54,7 +54,7 @@ class Results extends Component {
                     let list = [];
                     providerList.forEach((item, i) => {
                       if (item !== undefined && item.provider_name !== undefined) {
-                        list.push(item.provider_name);
+                        list.push(item.provider_name.toLowerCase());
                       }
                     });
                     this.setState({
@@ -92,6 +92,7 @@ class Results extends Component {
         }
 
        componentDidUpdate(prevProps, prevState, SS) {
+
           if (prevState.addToWatchlist !== this.state.addToWatchlist) {
             if (this.state.addToWatchlist !== null && this.state.addToWatchlist !== undefined ) {
               let rootRef = firebase.database().ref('users').child(this.props.user + "/watchlist/");
@@ -147,6 +148,7 @@ class Results extends Component {
               themes = themes.join(', ');
             }
 
+
             return (<div className={open}>
                       <Result
                         title={this.state.synopsis.title}
@@ -164,6 +166,7 @@ class Results extends Component {
                         admin={this.props.admin}
                         verify={(e) => this.props.verify(e, this.props.entry)}
                         whereToWatch={this.state.whereToWatch}
+                        whereToWatchTag={this.props.whereToWatchTag}
                         loggedIn={this.props.loggedIn}
                         onWatchlist={this.state.synopsis.onWatchlist}
                         addToWatchlist={this.watchlistClickHandler}

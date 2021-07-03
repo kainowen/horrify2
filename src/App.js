@@ -17,7 +17,8 @@ class App extends Component {
             userPass: '',
             userID:'',
             myWatchList: [],
-            myWatchListCodes: []
+            myWatchListCodes: [],
+            modalShow: false
     });
 
     userDetailsHandler = (event) => {
@@ -59,6 +60,11 @@ class App extends Component {
       });
     }
 
+    showModalHandler = () => {
+      let showModal = this.state.modalShow
+      this.setState({modalShow: !showModal})
+    }
+
     componentDidMount() {
       firebase.auth().onAuthStateChanged((user) => {
         if (user) {
@@ -96,23 +102,26 @@ class App extends Component {
     render() {
       let page = null;
       if (this.state.loggedIn !== null ){
-        page = (<BrowserRouter>
-            <Route path="/" exact> <Main loggedIn={this.state.loggedIn} watchlist={this.state.myWatchListCodes} user={this.state.userID} /></Route>
-            <Route path="/admin" exact> <Admin loggedIn={this.state.loggedIn} watchlist={this.state.myWatchListCodes} user={this.state.userID} /></Route>
-            <Route path="/my-list" exact> <MyList loggedIn={this.state.loggedIn} watchlist={this.state.myWatchListCodes} watchlistFull={this.state.myWatchList} user={this.state.userID} /></Route>
-            <div className='Container Centered'>
-                <hr />
-                <p>Know of any movies we don't have listed?</p>
-                {this.state.modalShow ? <Modal show={this.state.modalShow} clicked={this.showModalHandler} /> : null}
-                <Contribute
-                    howtoClicked={this.showModalHandler}
-                    loggedIn={this.state.loggedIn}
-                    clickLogin={this.userLogInHandler}
-                    clickLogout={this.logoutHandler}
-                    userEmail={this.state.userEmail}
-                    userPass={this.state.userPass}
-                    onChange={(e) => this.userDetailsHandler(e)}
-                    />
+        page = (
+          <BrowserRouter>
+            <div style={{minHeight: "calc(100vh - 65px)"}}>
+              <Route path="/" exact> <Main loggedIn={this.state.loggedIn} watchlist={this.state.myWatchListCodes} user={this.state.userID} /></Route>
+              <Route path="/admin" exact> <Admin loggedIn={this.state.loggedIn} watchlist={this.state.myWatchListCodes} user={this.state.userID} /></Route>
+              <Route path="/my-list" exact> <MyList loggedIn={this.state.loggedIn} watchlist={this.state.myWatchListCodes} watchlistFull={this.state.myWatchList} user={this.state.userID} /></Route>
+              <div className='Container Centered'>
+                  <hr />
+                  <p>Know of any movies we don't have listed?</p>
+                  <Modal show={this.state.modalShow} clicked={this.showModalHandler} />
+                  <Contribute
+                      howtoClicked={this.showModalHandler}
+                      loggedIn={this.state.loggedIn}
+                      clickLogin={this.userLogInHandler}
+                      clickLogout={this.logoutHandler}
+                      userEmail={this.state.userEmail}
+                      userPass={this.state.userPass}
+                      onChange={(e) => this.userDetailsHandler(e)}
+                      />
+              </div>
             </div>
             <Footer />
         </BrowserRouter>)

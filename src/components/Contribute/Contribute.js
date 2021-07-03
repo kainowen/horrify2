@@ -21,18 +21,6 @@ class Contribute extends Component {
         signInError:''
       };
 
-  /*userDetailsHandler = (event) => {
-    let email;
-    let pass;
-    if (event.target.id === 'userEmail'){
-      email = event.target.value;
-      this.setState({userEmail: email})
-    } else if (event.target.id === 'userPass'){
-      pass = event.target.value;
-      this.setState({userPass: pass});
-    }
-  }*/
-
   userSignUpHandler = (e) => {
     firebase.auth()
       .createUserWithEmailAndPassword(this.props.userEmail, this.props.userEmail)
@@ -41,20 +29,6 @@ class Contribute extends Component {
           console.log(error.message);
         });
   }
-
-/*  userLogInHandler = (e) => {
-    firebase.auth()
-      .signInWithEmailAndPassword(this.state.userEmail, this.state.userEmail)
-        .catch((error) => {
-          this.setState({signInError: error.message});
-        });
-  }
-
-  logoutHandler = (e) => {
-    firebase.auth().signOut().then(res => {
-      this.setState({loggedIn: false});
-    });
-  }*/
 
   changeEventHandler = (event) => {
         const updatedState = { ...this.state.movieAdd };
@@ -210,13 +184,6 @@ class Contribute extends Component {
         }
       }
     }
-    /*if (prevState.state.alerts !== this.state.alerts) {
-      if (this.state.alerts !== undefined && this.state.alerts.includes( 'Thanks for adding' )) {
-        this.setState({
-          entry: {}
-        });
-      }
-    }*/
   }
 
   render() {
